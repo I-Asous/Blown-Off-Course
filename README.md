@@ -1,4 +1,4 @@
-# Wind Load Capacity: NYC Wind Exposure Mapping for Street Asset Siting
+# Where Assets Can Stand: A Wind Load Capacity Map of New York City
  
 **NYC DOT Internship Project**
  
