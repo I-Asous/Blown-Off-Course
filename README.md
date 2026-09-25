@@ -43,6 +43,7 @@ Figures 1609.4.3(1)–(5) map these exposures along each borough's shoreline:
 3. Brooklyn
 4. Queens
 5. Staten Island
+
 Code reference: <https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-177667>
  
 ## Objectives
