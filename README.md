@@ -1,32 +1,54 @@
-# Blown Off Course: Modeling Wind Damage and DOT Response in NYC
+# Wind Load Capacity: NYC Wind Exposure Mapping for Street Asset Siting
+ 
+**NYC DOT Internship Project**
+ 
+## Overview
+ 
+NYC DOT installs street assets such as bus shelters, kiosks, and other street furniture across all five boroughs. Each one has to withstand the wind load at its location, and that load changes a lot depending on how close the site is to open water.
+ 
+This project digitizes the wind exposure categories in the **NYC Building Code (§1609.4.3)** and maps them citywide. The result is a GIS layer that shows, for any location, which exposure category applies and how far it is from the shoreline. DOT can overlay it with asset data to decide where something can be safely placed.
+ 
+**Core question:** Where is wind load greatest, and can a given asset be safely placed there?
+ 
+## Background
+ 
+### Basic Design Wind Speed (NYC Building Code §1609.3)
+ 
+**Table 1609.3: Basic Design Wind Speed**
+ 
+| Risk Category | Basic Design Wind Speed, mph (3-sec gust, 33 ft, Exposure C) | Mean Recurrence Interval, years | Probability of Exceedance in 50 years, % |
+|---|---|---|---|
+| I | 110 | 300 | 15 |
+| II | 117 | 700 | 7 |
+| III | 127 | 1,700 | 3 |
+| IV | 132 | 3,000 | 1.6 |
 
-## What this project is
-
-High winds are a recurring, under-managed threat to New York City's transportation network. Gusts knock out traffic signals, down signs and streetlights, scatter debris across roadways, and force decisions about restricting or closing bridges — yet wind response tends to get far less dedicated planning attention than snow or flooding, even though it happens more often and touches nearly every asset class NYC DOT is responsible for.
-
-This project is a web-based tool that turns that gap into something concrete: a single application with three connected views —
-
-1. **311 Dashboard** — real NYC 311 complaint data from past wind events (Tropical Storm Isaias, Hurricane Sandy, or any custom date range), broken down by responding agency and borough, so you can see who actually handles wind damage and how fast.
-2. **Forecast & Alerts** — a live wind-gust forecast from the National Weather Service, run through an internal five-level DOT alert ladder (Routine → Monitor → Advisory → Warning → Extreme), plus a *prediction* of expected damage if nobody responds.
-3. **Storm Simulator** — a game-style tool where you play DOT duty commander: allocate a limited budget across crews, pre-storm securing, a public advisory, and bridge/truck-ban thresholds, then watch a storm play out hour by hour and get scored against a "do nothing" baseline.
-
-All three views share one underlying damage model, so the historical data, the live forecast, and the simulated response stay consistent with each other rather than existing as three disconnected demos.
-
-## Why this project exists
-
-NYC DOT's mission is to keep the city moving safely and to maintain its transportation assets, over 6,000 miles of streets and sidewalks and 789 bridges — in a state of good repair. The *Strategic Plan 2016: Safe, Green, Smart, Equitable* commits the agency to exactly the kind of work wind resilience demands: safety (fewer dark intersections and debris hazards), smart operations (using data and forecasts instead of reacting after the fact), climate adaptation (storms intensifying under the plan's own 80x50 framing), and equity (making sure response isn't uneven across boroughs).
-
-Today, wind response appears largely reactive: decisions get made as conditions are observed, without a shared view of what's likely coming, what damage to expect, or how a proposed response compares to doing nothing at all. This project exists to demonstrate what closing that gap could look like — a proactive, data-grounded approach to a hazard that has historically been treated as an afterthought.
-
-## Goals and how success is measured
-
-- **Show what actually happened.** The dashboard should load real 311 data for known wind events and split it cleanly by agency and borough, with no load errors.
-- **See it coming.** The Forecast page should pull a live NWS forecast, classify it correctly against the alert ladder, and degrade gracefully to a labeled demo forecast if the live connection fails.
-- **Test a response before it's needed.** The simulator should score any plan against a "do nothing" baseline such that no single strategy dominates regardless of storm type — verified by testing that the best budget allocation genuinely changes from a light gale to a hurricane-force mission.
-- **Stay internally consistent.** The Forecast page's damage prediction and the simulator's baseline should come from the same underlying model, not two disconnected pieces of logic.
-- **Work without live data.** Every external data source has a clearly labeled synthetic fallback, so the full app runs and passes its test suite with zero network access.
-- **Be honest about its limits.** Documentation states plainly which numbers are real (311 records, NWS forecasts) and which are illustrative placeholders (asset counts, failure rates, alert thresholds), with a concrete path to real calibration.
-
-## Intended outcome
-
-The deliverable is a working application that demonstrates the full arc of wind-event management in one place: what happened last time, what's about to happen, and what a good response looks like compared to no response at all. It's built as a class/portfolio project rather than a production DOT system — the damage rates and alert thresholds are placeholder assumptions, not validated agency figures — but it's structured so that gap is explicit and fixable: the README and in-app notes point directly at how the illustrative model could be replaced with rates fit to real historical data, turning this from a demonstration into a genuinely useful planning tool.
+ 
+**Why it matters for this project:**
+- The wind speed sets the baseline load for a structure.
+- The exposure category, mapped in this project, then adjusts that load up or down depending on location.
+ 
+### Wind Exposure Categories (NYC Building Code §1609.4.3)
+ 
+| Category | Description | Code Criteria |
+|---|---|---|
+| **B** | Sheltered, dense urban surface | Structures 30 ft tall or less: 1,500 ft of built-up surface roughness upwind. Taller structures: 2,600 ft or 20× building height, whichever is greater. |
+| **C** | Default / near-shore | Applies where shown in Figure 1609.4.3, or wherever B or D doesn't apply. On the figures, this covers buildings within 2,600 ft (or 20× height) of the shoreline. |
+| **D** | Coastal, highest wind | Open-water roughness for 5,000 ft (or 20× height) upwind, plus sites within 600 ft (or 20× height) of a D condition. |
+ 
+Figures 1609.4.3(1)–(5) map these exposures along each borough's shoreline:
+ 
+1. Manhattan
+2. Bronx
+3. Brooklyn
+4. Queens
+5. Staten Island
+Code reference: <https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-177667>
+ 
+## Objectives
+ 
+1. Digitize the NYC shoreline and assign exposure categories to each segment using the code figures.
+2. Build exposure zones based on distance from the shoreline, measured in feet.
+3. Classify every building footprint into Exposure B, C, or D.
+4. Overlay existing and proposed street assets to flag high-exposure placements.
+5. Produce decision-ready maps that DOT staff can layer with other datasets.
