@@ -14,7 +14,7 @@ All three views share one underlying damage model, so the historical data, the l
 
 ## Why this project exists
 
-NYC DOT's mission is to keep the city moving safely and to maintain its transportation assets — over 6,000 miles of streets and sidewalks and 789 bridges — in a state of good repair. The *Strategic Plan 2016: Safe, Green, Smart, Equitable* commits the agency to exactly the kind of work wind resilience demands: safety (fewer dark intersections and debris hazards), smart operations (using data and forecasts instead of reacting after the fact), climate adaptation (storms intensifying under the plan's own 80x50 framing), and equity (making sure response isn't uneven across boroughs).
+NYC DOT's mission is to keep the city moving safely and to maintain its transportation assets, over 6,000 miles of streets and sidewalks and 789 bridges — in a state of good repair. The *Strategic Plan 2016: Safe, Green, Smart, Equitable* commits the agency to exactly the kind of work wind resilience demands: safety (fewer dark intersections and debris hazards), smart operations (using data and forecasts instead of reacting after the fact), climate adaptation (storms intensifying under the plan's own 80x50 framing), and equity (making sure response isn't uneven across boroughs).
 
 Today, wind response appears largely reactive: decisions get made as conditions are observed, without a shared view of what's likely coming, what damage to expect, or how a proposed response compares to doing nothing at all. This project exists to demonstrate what closing that gap could look like — a proactive, data-grounded approach to a hazard that has historically been treated as an afterthought.
 
